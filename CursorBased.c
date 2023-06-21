@@ -93,5 +93,17 @@ void deallocSpace(VirtualHeap *VH, int index){
 }
 
 Student removeStudent(VirtualHeap *VH, List *list, String keyword){
-	Student 
+	Student retVal;
+	List *trav, temp;
+	
+	for(trav = list; *trav != -1 && strcmp(keyword,VH->elems[*trav].elem.studName)!=0;trav = &VH->elems[*trav].next){
+		retVal = VH->elems[*trav].elem;
+	}
+	if(*trav != -1){
+		temp = *trav;
+		*trav = VH->elems[temp].next;
+		deallocSpace(VH, temp);
+	}
+	
+	return retVal;
 }
