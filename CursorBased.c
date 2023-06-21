@@ -48,7 +48,23 @@ void insertFront(VirtualHeap *VH, List *list, Student s){
 	
 }
 
-//void displayList(VirtualHeap VH, List list);
+void displayList(VirtualHeap VH, List list){
+	printf("%5s | %30s | %s\n","INDEX", "ELEMENTS", "NEXT");
+	printf("-------------------------------------------\n");
+	
+	while(list != -1){
+		printf("%5d | ", list);
+		if(!VH.elems[list].elem.studID){
+			printf("%30s | ", "EMPTY");
+		}else{
+			printf("%4d - %23s | ", VH.elems[list].elem.studID,VH.elems[list].elem.studName);
+		}
+		printf("%d\n", VH.elems[list].next);
+		list = VH.elems[list].next;
+	}
+	printf("---------------------------------------------\n");
+}
+
 void visualizeSpace(VirtualHeap VH){
 	int ctr;
 	printf("%5s | %30s | %s\n","INDEX", "ELEMENTS", "NEXT");
@@ -65,4 +81,17 @@ void visualizeSpace(VirtualHeap VH){
 	}
 	printf("---------------------------------------------\n");
 	printf("AVAILABLE: %d\n\n", VH.avail);
+}
+
+void deallocSpace(VirtualHeap *VH, int index){
+	if(index != -1 && index< MAX){
+		VH->elems[index].next = VH->avail;
+		VH->elems[index].elem = newStudent(0," ",' '," ");
+		VH->avail = index;
+	}
+	
+}
+
+Student removeStudent(VirtualHeap *VH, List *list, String keyword){
+	Student 
 }
